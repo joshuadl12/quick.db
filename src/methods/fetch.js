@@ -4,7 +4,7 @@ const get = require('lodash/get');
 module.exports = function(db, params, options) {
   
   // Fetch Entry
-  let fetched = db.prepare(`SELECT * FROM ${options.table} WHERE ID = (?)`).get(params.id);
+  let fetched = db.query(`SELECT * FROM ${options.table} WHERE ID = ${params.id}`);
   if (!fetched) return null; // If empty, return null
   fetched = JSON.parse(fetched.json)
   try { fetched = JSON.parse(fetched) } catch (e) {}
